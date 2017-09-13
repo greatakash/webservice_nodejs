@@ -3,7 +3,7 @@ api using nodejs
 
 This repo contains web services in GET and POST method.
 It has package.json which contains all dependencies, just type
->> npm install
+>> ""npm install""
 and it will install all the dependencies it requies for this API.
 
 
