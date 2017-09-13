@@ -11,12 +11,12 @@ var con = mysql.createConnection({
 			host: "localhost",
 			user: "root",
 			password: "",
-			database: "interviewportal"
+			database: "dbname"
 		});
 
 //api.set('view engine','ejs');
 /* use res.write function once for one function,below i had use twice to understand both */
-api.get('/get',function(req,res){
+api.get('/get/[0-9]*',function(req,res){
 		res.writeHead(200,{'Content-Type':'text/html'});
 		fs.readFile("file.txt", 'utf8',function(err,data){
 			//console.log(data);
@@ -24,7 +24,9 @@ api.get('/get',function(req,res){
 			res.write(data);
 			//return res.end();
 		});
-		sql = "SELECT * FROM `users`";
+		var pathname = url.parse(req.url).pathname;
+		var token = pathname.substr(pathname.lastIndexOf('/') + 1);
+		sql = "SELECT * FROM `users` where token='"+token+"'";
 		con.connect(function(err) {
 		//if (err) throw err;
 		con.query(sql, function (err, users) {
